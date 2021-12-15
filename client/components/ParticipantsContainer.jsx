@@ -1,57 +1,129 @@
-import React, { Component, useState } from 'react';
-//import Participant from './Participant.jsx'
 
-class ParticipantsContainer extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            fetchedParticipants: false,
-            participants: [],
-        };
+import React, { Component } from "react";
+import PartDataService from "../services/part.service.js";
+import { Link } from 'react-router-dom';
+
+import Participant from "./Participants.jsx";
+
+export default class ParticipantsContainer extends Component {
+  constructor(props){
+    super(props);
+    this.retrieveParticipants = this.retrieveParticipants.bind(this);
+    this.refreshList = this.refreshList.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
+    this.addParticipant = this.addParticipant.bind(this);
+    this.newParticipant = this.newParticipant.bind(this);
+
+    this.state = {
+        participants: [],
+        newPart: '',
+        fetchedParticipants: false,
+        submitted: false
+    }
+  }
+  
+  componentDidMount(){
+      this.retrieveParticipants();
+  }
+
+  onChangeName(e){
+      this.setState({
+        newPart: e.target.value
+      });
+  }
+
+  addParticipant(){
+    var data = {
+        name: this.state.newPart
     }
 
-    componentDidMount(){
-        fetch('/api/1/participants')
-        .then(res => res.json())
-        .then((participants) =>{
-            if(!Array.isArray(participants)) participants = [];
-            console.log(participants)
-            return this.setState({
-                participants,
-                fetchedParticipants: true
-            })
-        })
-        .catch(err => console.log('ParticipantsContainer.componentDidMount: get participants: ERROR: ', err));
-    }
+    PartDataService.addPart('1', data)
+      .then(response => {
+          this.setState({
+            submitted: true
+          });
+          console.log(response.data)
+          this.retrieveParticipants();
+          this.newParticipant();
+      })
+      .catch(e => {
+          console.log(e);
+      })
+  }
 
-    render(){
-        if(!this.state.fetchedParticipants) return (
-            <div>
-                <h1>Loading data, please wait...</h1>
-            </div>
-        );
+  newParticipant(){
+      this.setState({
+          newPart: '',
+          submitted: false
+      });
+  }
 
-        const { participants} = this.state;
+  retrieveParticipants(){
+      PartDataService.getGroup('1')
+      .then(response =>{
+          this.setState({
+              participants: response.data
+          });
+          console.log(response.data);
+      })
+      .catch(e => {
+          console.log(e);
+      })
+  }
 
-        if(!participants) return null;
+  refreshList(){
+      this.retrieveParticipants();
+  }
 
-        if(!participants.length) return (
-            <div>No participants found</div>
-        )
-
-        const participated = participants.map((indiv, i) => {
-                return(
-                    <h1>{indiv.name}</h1>
-                );               
-        });
-
+  render(){
+    const { participants } = this.state;
+    
+    if(!participants.length) return (
+      <div>No participants found</div>
+    )
+    
+    const participated = participants.map((indiv, i) => {
+      if(indiv.status === true){
         return(
-            <div id = 'participantsContainer'>
-                <h1 className='title'>Period 1</h1>
-                {participated}
-            </div>
-        )
-    }
-};
+          <Participant className='parts' key={i} info={indiv}></Participant>
+        );        
+      }
+    });
 
-export default ParticipantsContainer;
+    const notParticipated = participants.map((indiv, i) => {
+        if(indiv.status === false){
+          return(
+            <Participant className='parts' key={i} info={indiv}></Participant>
+          );        
+        }
+    });
+
+
+    return(
+      <div id='participantsContainer'>
+        <h1>Period 1</h1>
+        <div id='mainList'>
+
+            <div id='notParted'>
+                <h2>Has Not Participated</h2>
+                <div className='partList'>
+                    {notParticipated}
+                </div>
+                <div className='form-group'>
+                    <input type='text' id='partInputForm' value={this.state.newPart} onChange={this.onChangeName} name='title'></input>
+                    <button id='addPartButton' onClick={this.addParticipant}>Add Participant</button> 
+                </div>
+
+            </div>     
+
+            <div id='parted'>
+                <h2>Participated</h2>
+                    <div className='partList'>
+                        {participated}  
+                    </div>           
+                </div>
+            </div>
+      </div>
+    )
+  }
+}
