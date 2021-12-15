@@ -1,5 +1,121 @@
-$lightBlue: lightblue;
+$light-color: rgb(217, 239, 241);
+$darker-color: powderblue;
+$lt-blue: #afdefa;
+$dk-blue: #a5c6fc;
+$text-color: darken($dk-blue, 40%);
+$extra-dk: darken($dk-blue, 20%);
+
+
 
 body {
-  background: $lightBlue;
+  //background: $light-color;
+  background: linear-gradient(0deg, hsla(217, 100%, 50%, 0.5) 0%, hsla(186, 100%, 69%, 1) 100%);
+  font-family: 'Varela Round', sans-serif;
+  color: $text-color;
+
+  h1, h2{
+    font-family: 'Balsamiq Sans', cursive;
+    text-align: center;
+  }
+}
+
+.title{
+  text-align: center;
+}
+
+.classLink{
+  font-size: 5vw;
+  text-decoration: none;
+  padding: 20px 40px;
+  background-color: white;
+  border-radius: 10px;
+  color: $extra-dk
+}
+
+.classLink:hover{
+  background-color: darken($dk-blue, 20%);
+  color: white;
+}
+
+#home{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#participantsContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#mainList{
+  display: flex;
+  width: 95%;
+}
+
+.partList{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  
+}
+
+.listContainer{
+  width: 50%;
+  margin: 10px;
+  border-radius: 20px;
+  background-color: $lt-blue;
+}
+
+#notParted{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.participant{
+  border-radius: 10px;
+  background-color: $dk-blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  width: 100px;
+}
+
+#deleteButton{
+  border-radius: 50%;
+  border: 0px;
+  align-self: flex-end;
+}
+
+#selector{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $lt-blue;
+  border-radius: 20px;
+  min-height: 200px;
+}
+
+#randomButton{
+  margin-top: 15px;
+  background-color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 5px;
+  font-family: 'Varela Round', sans-serif;
+}
+
+#selectedCont{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

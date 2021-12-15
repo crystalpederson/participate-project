@@ -9,8 +9,12 @@ class PartDataService {
     return http.post(`/participants/${id}`, data);
   }
 
-  update(id, data) {
+  updatePart(id, data) {
     return http.put(`/participants/${id}`, data);
+  }
+
+  deletePart(id, data) {
+    return http.delete(`/participants/${id}`, data);
   }
 }
 

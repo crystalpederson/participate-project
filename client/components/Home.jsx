@@ -6,7 +6,7 @@ class Home extends Component{
         return(
             <div id = 'home'>
                 <h1 className='title'>Your Groups:</h1>
-                <Link to="participants">Period 1</Link>
+                <Link className='classLink' to="participants">Period 1</Link>
             </div>
         )
     }

@@ -59,7 +59,6 @@ partController.deleteParticipants = (req, res, next) => {
         },
       });
     }
-    res.locals.deleted = req.body.name
     next();
   })
 };
