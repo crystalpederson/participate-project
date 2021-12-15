@@ -1,129 +1,69 @@
 import React, { Component } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
+
 import Home from './Home.jsx';
 import ParticipantsContainer from './ParticipantsContainer.jsx';
+import Login from './Login.jsx';
 
-const App = props => {
-  return (
-    <div className="router">
-      <div className = "title">
-        <h1>Participate!</h1>
+
+class App extends Component{
+  render(){
+    return(
+      <div>
+        <nav className='navbar'>
+          <a href='/' className='navbar-brand'>
+            Home
+          </a>
+          <div className='navbar-nav'>
+            {/* <li className='nav-item'>
+              <Link to={'/participants'} className='nav-link'>
+                Participants
+              </Link>
+            </li> */}
+            <li className='nav-item'>
+              <Link to={'/login'} className='nav-link'>
+                Login
+              </Link>
+            </li>
+          </div>
+        </nav>
+
+        <div className='container'>
+          <Routes>
+            <Route path={'/home', '/'} element={<Home/>}></Route>
+            <Route path='/login' element={<Login/>}></Route>
+            <Route path='participants' element={<ParticipantsContainer/>}></Route>
+          </Routes>
+        </div>
+
       </div>
-      <main>
-        <Routes>
-          <Route
-            path="/"
-            element={<Home/>}
-          />
-          <Route
-            path="/participants"
-            // path='/'
-            element={<ParticipantsContainer/>}
-          />
-        </Routes>
-      </main>
-    </div>
-  );
+    )
+  }
+
 };
+
 export default App;
 
-// import Row from './Row';
-// import GameList from './GameList';
-// import Leaders from './Leaders';
 
-// let gameStore = [];
-
-// function getInitialState() {
-//   return {
-//     rows: [
-//       ['', '', ''],
-//       ['', '', ''],
-//       ['', '', ''],
-//     ],
-//     turn: 'X',
-//     winner: undefined,
-//     gameList: gameStore,
-//   };
-// }
-
-// function checkWin(rows) {
-//   const combos = [
-//     [0, 1, 2],
-//     [3, 4, 5],
-//     [6, 7, 8],
-//     [0, 4, 8],
-//     [2, 4, 6],
-//     [0, 3, 6],
-//     [1, 4, 7],
-//     [2, 5, 8],
-//   ];
-
-//   const flattened = rows.reduce((acc, row) => acc.concat(row), []);
-
-//   return combos.find(combo => (
-//     flattened[combo[0]] !== '' &&
-//     flattened[combo[0]] === flattened[combo[1]] &&
-//     flattened[combo[1]] === flattened[combo[2]]
-//   ));
-// }
-
-// class App extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.handleClick = this.handleClick.bind(this);
-//     this.state = getInitialState();
-//   }
-  
-//   handleClick(row, square) {
-//     let { turn, winner } = this.state;
-//     const { rows } = this.state;
-//     const squareInQuestion = rows[row][square];
-
-//     if (this.state.winner) return;
-//     if (squareInQuestion) return;
-
-//     rows[row][square] = turn;
-//     turn = turn === 'X' ? 'O' : 'X';
-//     winner = checkWin(rows);
-
-//     this.setState({
-//       rows,
-//       turn,
-//       winner,
-//     });
-//   }
-
-//   render() {
-//     const { rows, turn, winner, gameList } = this.state;
-//     const handleClick = this.handleClick;
-
-//     const rowElements = rows.map((letters, i) => (
-//       <Row key={i} row={i} letters={letters} handleClick={handleClick} />
-//     ));
-
-//     let infoDiv;
-//     if (winner) {
-//       let winTurn = turn === 'X' ? 'O' : 'X';
-//       infoDiv = (
-//         <div>
-//           <div>Player {winTurn} wins with squares {winner.join(', ')}!</div>
-//         </div>
-//       );
-//     } else {
-//       infoDiv = <div>Turn: {turn}</div>;
-//     }
-
-//     return (
-//       <div>
-//         {infoDiv}
-//         <div id="board">
-//           {rowElements}
-//         </div>
-//         <button id="reset" onClick={() => this.setState(getInitialState())}>Reset board</button>
-//         <GameList gameList={gameList} />
-//         <Leaders />
-//       </div>
-//     );
-//   }
-// }
-
+// render(){
+  //     return (
+  //   <div className="router">
+  //     <div className = "title">
+  //       <h1>Participate!</h1>
+  //     </div>
+  //     <main>
+  //       <Routes>
+  //         <Route
+  //           path="/"
+  //           element={<Home/>}
+  //         />
+  //         <Route
+  //           path="/participants"
+  //           // path='/'
+  //           element={<ParticipantsContainer/>}
+  //         />
+  //       </Routes>
+  //     </main>
+  //   </div>
+  // );
+  // }

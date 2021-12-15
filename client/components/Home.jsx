@@ -5,7 +5,7 @@ class Home extends Component{
     render(){
         return(
             <div id = 'home'>
-                <h1 className='title'>This is the home page!</h1>
+                <h1 className='title'>Your Groups:</h1>
                 <Link to="participants">Period 1</Link>
             </div>
         )
