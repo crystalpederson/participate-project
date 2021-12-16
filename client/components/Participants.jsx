@@ -13,8 +13,10 @@ const Participant =(props) => {
   return(
     <div className='participant'>
       <button id='deleteButton' onClick={()=>{{deletePart(name)}}}>x</button>
+      {/* <button id='deleteButton' onClick={update}>x</button> */}
       <h4 id='partName'>{name}</h4>
-      {/* <input className='check' type='checkbox'></input> */}
+      <input className='check' type='checkbox' ></input>
+
     </div>
   );
 

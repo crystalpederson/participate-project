@@ -8,6 +8,7 @@ $extra-dk: darken($dk-blue, 20%);
 
 
 body {
+  margin: 0;
   //background: $light-color;
   background: linear-gradient(0deg, hsla(217, 100%, 50%, 0.5) 0%, hsla(186, 100%, 69%, 1) 100%);
   font-family: 'Varela Round', sans-serif;
@@ -17,6 +18,19 @@ body {
     font-family: 'Balsamiq Sans', cursive;
     text-align: center;
   }
+}
+
+nav{
+  display: flex;
+  background-color: $extra-dk;
+  padding: 10px;
+}
+
+.nav-link{
+  text-decoration: none;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .title{
@@ -82,15 +96,16 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   margin: 10px;
   width: 100px;
 }
 
 #deleteButton{
-  border-radius: 50%;
   border: 0px;
   align-self: flex-end;
+  color: white;
+  background-color: transparent;
 }
 
 #selector{
@@ -118,4 +133,14 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+
+input[type=checkbox] {
+  zoom:2;
+    // transform: scale(2);
+    // -ms-transform: scale(2);
+    // -webkit-transform: scale(2);
+    // padding: 10px;
+    // margin: 5px;
 }

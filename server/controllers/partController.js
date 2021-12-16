@@ -64,7 +64,6 @@ partController.deleteParticipants = (req, res, next) => {
 };
 
 partController.updateParticipants = (req, res, next) => {
-  
   if(req.body.status === false){
     queryText = 'UPDATE participants SET status = TRUE WHERE class_id = ($1) AND name = ($2)';
   }else{
