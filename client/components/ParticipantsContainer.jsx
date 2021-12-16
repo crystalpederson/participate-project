@@ -38,9 +38,8 @@ export default class ParticipantsContainer extends Component {
 
     if(this.state.participants[i].status === false){
         const selected = this.state.participants[i];
-        // console.log(selected)
         this.setState({
-            currentPart: selected
+            currentPart: selected,
         })
     }
     else{
@@ -52,8 +51,9 @@ export default class ParticipantsContainer extends Component {
     var data = {
         name: this.state.newPart
     }
-
-    PartDataService.addPart('1', data)
+    
+    if(this.state.newPart !== ''){
+          PartDataService.addPart('1', data)
       .then(response => {
           this.setState({
             submitted: true
@@ -65,6 +65,7 @@ export default class ParticipantsContainer extends Component {
       .catch(e => {
           console.log(e);
       })
+    }
   }
 
   newParticipant(){
@@ -81,7 +82,6 @@ export default class ParticipantsContainer extends Component {
           this.setState({
               participants: response.data
           });
-          console.log(response.data);
       })
       .catch(e => {
           console.log(e);
@@ -106,7 +106,7 @@ export default class ParticipantsContainer extends Component {
     const participated = participants.map((indiv, i) => {
       if(indiv.status === true){
         return(
-          <Participant className='parts' key={i} info={indiv} retrieveParticipants={this.retrieveParticipants}></Participant>
+          <Participant className='parts' key={i} info={indiv} clear={this.newParticipant} retrieveParticipants={this.retrieveParticipants}></Participant>
         );        
       }
     });
@@ -114,17 +114,17 @@ export default class ParticipantsContainer extends Component {
     const notParticipated = participants.map((indiv, i) => {
         if(indiv.status === false){
           return(
-            <Participant className='parts' key={i} info={indiv} retrieveParticipants={this.retrieveParticipants}></Participant>
+            <Participant className='parts' key={i} info={indiv} clear={this.newParticipant} retrieveParticipants={this.retrieveParticipants}></Participant>
           );        
         }
     });
 
     const current = () =>{
         if(this.state.currentPart){
+            console.log(this.currentIndex);
             return(
                 <div id='selectedCont'>
-                  <Participant className='parts' key='current' info={this.state.currentPart} retrieveParticipants={this.retrieveParticipants}></Participant>
-                  <button onClick={this.newParticipant}>Clear</button>         
+                  <Participant className='parts' key='current' info={this.state.currentPart} clear={this.newParticipant} retrieveParticipants={this.retrieveParticipants}></Participant>      
                 </div>
             )
         }
@@ -134,10 +134,9 @@ export default class ParticipantsContainer extends Component {
       <div id='participantsContainer'>
         <h1>Period 1</h1>
         <div id='selector'>
-          <button id='randomButton' onClick={this.selectParticipant}>Select a Random Participant!</button>
+          <button className='partButtons' id='randomButton' onClick={this.selectParticipant}>Select a Random Participant!</button>
           <div id='selectorContent'>
               {current()}
-               {/* <Participant className='parts' key='current' info={this.state.currentPart} retrieveParticipants={this.retrieveParticipants}></Participant>  */}
           </div>
         </div>
         <div id='mainList'>
@@ -146,10 +145,6 @@ export default class ParticipantsContainer extends Component {
                 <h2>Has Not Participated</h2>
                 <div className='partList'>
                     {notParticipated}
-                </div>
-                <div className='form-group'>
-                    <input type='text' id='partInputForm' value={this.state.newPart} onChange={this.onChangeName} name='title'></input>
-                    <button id='addPartButton' onClick={this.addParticipant}>Add Participant</button> 
                 </div>
 
             </div>     
@@ -161,6 +156,11 @@ export default class ParticipantsContainer extends Component {
                     </div>           
                 </div>
             </div>
+
+                <div className='form-group'>
+                    <input type='text' placeholder='Enter name' id='partInputForm' value={this.state.newPart} onChange={this.onChangeName} name='title'></input>
+                    <button className='partButtons' id='addPartButton' onClick={this.addParticipant}>Add Participant</button> 
+                </div>
       </div>
     )
   }

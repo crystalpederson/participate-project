@@ -37,6 +37,7 @@ partController.addParticipants = (req, res, next) => {
         },
       });
     }
+    res.locals.added = req.body.name;
     next();
   });
 
@@ -59,6 +60,7 @@ partController.deleteParticipants = (req, res, next) => {
         },
       });
     }
+    res.locals.deleted = req.body.name;
     next();
   })
 };

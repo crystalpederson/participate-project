@@ -4,15 +4,17 @@ $lt-blue: #afdefa;
 $dk-blue: #a5c6fc;
 $text-color: darken($dk-blue, 40%);
 $extra-dk: darken($dk-blue, 20%);
+$off-white: rgb(248, 248, 248);
 
 
 
 body {
   margin: 0;
+  margin-bottom: 20px;
   //background: $light-color;
   background: linear-gradient(0deg, hsla(217, 100%, 50%, 0.5) 0%, hsla(186, 100%, 69%, 1) 100%);
   font-family: 'Varela Round', sans-serif;
-  color: $text-color;
+  color: $extra-dk;
 
   h1, h2{
     font-family: 'Balsamiq Sans', cursive;
@@ -41,7 +43,7 @@ nav{
   font-size: 5vw;
   text-decoration: none;
   padding: 20px 40px;
-  background-color: white;
+  background-color: $off-white;
   border-radius: 10px;
   color: $extra-dk
 }
@@ -83,13 +85,6 @@ nav{
   background-color: $lt-blue;
 }
 
-#notParted{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .participant{
   border-radius: 10px;
   background-color: $dk-blue;
@@ -118,9 +113,9 @@ nav{
   min-height: 200px;
 }
 
-#randomButton{
+.partButtons{
   margin-top: 15px;
-  background-color: white;
+  background-color: $off-white;
   border: none;
   padding: 10px 20px;
   text-align: center;
@@ -135,12 +130,25 @@ nav{
   justify-content: center;
 }
 
+#partInputForm{
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: 'Varela Round', sans-serif;
+  margin-right: 20px;
+  background-color: $off-white;
+}
 
-input[type=checkbox] {
-  zoom:2;
-    // transform: scale(2);
-    // -ms-transform: scale(2);
-    // -webkit-transform: scale(2);
-    // padding: 10px;
-    // margin: 5px;
+.updateButton{
+  border:none;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  margin-bottom: 5px;
+  background-color: $off-white;
+}
+
+button:hover{
+  background-color: $extra-dk;
+  color: white;
 }

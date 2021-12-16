@@ -13,18 +13,18 @@ router.get('/participants/:id',
 router.post('/participants/:id',
   partController.addParticipants,
   //when a participant is added, redirect to this page
-  (req, res) => res.status(200).redirect('/')
+  (req, res) => res.status(200).json(res.locals.added)
 );
 
 //deletes a participant from class with given id# and name
 router.delete('/participants/:id',
   partController.deleteParticipants,
-  (req, res) => res.status(200)
+  (req, res) => res.status(200).json(res.locals.deleted)
 );
 
 //updates a participant with given id# and name
 router.put('/participants/:id',
   partController.updateParticipants,
-  (req, res) => res.status(200)
+  (req, res) => res.status(200).json('updated')
 );
 module.exports = router;
