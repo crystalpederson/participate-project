@@ -121,7 +121,6 @@ export default class ParticipantsContainer extends Component {
 
     const current = () =>{
         if(this.state.currentPart){
-            console.log(this.currentIndex);
             return(
                 <div id='selectedCont'>
                   <Participant className='parts' key='current' info={this.state.currentPart} clear={this.newParticipant} retrieveParticipants={this.retrieveParticipants}></Participant>      
@@ -134,7 +133,7 @@ export default class ParticipantsContainer extends Component {
       <div id='participantsContainer'>
         <h1>Period 1</h1>
         <div id='selector'>
-          <button className='partButtons' id='randomButton' onClick={this.selectParticipant}>Select a Random Participant!</button>
+          <button className='partButtons' id='randomButton' onClick={()=>setTimeout(this.selectParticipant,300)}>Select a Random Participant!</button>
           <div id='selectorContent'>
               {current()}
           </div>

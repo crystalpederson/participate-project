@@ -7,7 +7,6 @@ $extra-dk: darken($dk-blue, 20%);
 $off-white: rgb(248, 248, 248);
 
 
-
 body {
   margin: 0;
   margin-bottom: 20px;
@@ -146,9 +145,21 @@ nav{
   border-radius: 2px;
   margin-bottom: 5px;
   background-color: $off-white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button:hover{
   background-color: $extra-dk;
   color: white;
+}
+
+.emoji{
+  max-width: 70%;
+}
+
+h4{
+  margin-block-start: 0px;
+  margin-block-end: 0.1em;
 }
