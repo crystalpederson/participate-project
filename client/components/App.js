@@ -28,7 +28,7 @@ class App extends Component{
           <Routes>
             <Route path={'/home', '/'} element={<Home/>}></Route>
             <Route path='/login' element={<Login/>}></Route>
-            <Route path='participants' element={<ParticipantsContainer/>}></Route>
+            <Route path='participants/:id' element={<ParticipantsContainer/>}></Route>
           </Routes>
         </div>
 

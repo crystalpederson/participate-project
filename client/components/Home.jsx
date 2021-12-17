@@ -6,14 +6,14 @@ class Home extends Component{
     constructor(props){
         super(props);
         this.retrieveGroups = this.retrieveGroups.bind(this);
-        // this.onChangeName = this.onChangeName.bind(this);
-        // this.addParticipant = this.addParticipant.bind(this);
-        // this.newParticipant = this.newParticipant.bind(this);
+        this.onChangeName = this.onChangeName.bind(this);
+        this.addGroup = this.addGroup.bind(this);
+        this.newGroup = this.newGroup.bind(this);
         // this.selectParticipant = this.selectParticipant.bind(this);
     
         this.state = {
             groups: [],
-            newGroup: '',
+            newGroupName: '',
             fetchedGroups: false,
             submitted: false
         }
@@ -22,7 +22,40 @@ class Home extends Component{
     componentDidMount(){
         this.retrieveGroups();
     }
-    
+
+    onChangeName(e){
+        this.setState({
+          newGroupName: e.target.value
+        });
+    }
+
+    addGroup(){
+        var data = {
+            name: this.state.newGroupName
+        }
+        
+        if(this.state.newGroupName !== ''){
+            PartDataService.addGroup('1', data)
+            .then(response => {
+                this.setState({
+                submitted: true
+            });
+            this.retrieveGroups();
+            this.newGroup();
+          })
+          .catch(e => {
+              console.log(e);
+          })
+        }
+    }
+
+    newGroup(){
+        this.setState({
+            newGroupName: '',
+            submitted: false
+        });
+    }
+
     retrieveGroups(){
         PartDataService.getUserClasses('1')
         .then(response =>{
@@ -47,7 +80,8 @@ class Home extends Component{
 
         const groupList = groups.map((group, i) => {
               return(
-                <Link key={group.id} className='classLink' groupID={group.id} to='participants'>{group.name}</Link>
+                <Link key={group.id} className='classLink' to={`/participants/${group.id}`}>{group.name}</Link>
+                // <Link key={group.id} className='classLink' to={`/participants`}>{group.name}</Link>
               );        
         });
 
@@ -56,6 +90,10 @@ class Home extends Component{
                 <h1 className='title'>Your Groups:</h1>
                 <div id='group-list'>
                   {groupList}
+                </div>
+                <div className='form-group'>
+                    <input type='text' placeholder='Name' className='inputForm' value={this.state.newGroup} onChange={this.onChangeName} name='title'></input>
+                    <button id='addGroupButton' onClick={this.addGroup}>Add New Group</button> 
                 </div>
             </div>
         )

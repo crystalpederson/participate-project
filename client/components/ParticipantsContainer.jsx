@@ -1,9 +1,11 @@
 
 import React, { Component } from "react";
 import PartDataService from "../services/part.service.js";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import Participant from "./Participants.jsx";
+
+
 
 export default class ParticipantsContainer extends Component {
   constructor(props){
@@ -23,8 +25,11 @@ export default class ParticipantsContainer extends Component {
     }
   }
   
+
+  
   componentDidMount(){
       this.retrieveParticipants();
+
   }
 
   onChangeName(e){
@@ -48,17 +53,19 @@ export default class ParticipantsContainer extends Component {
   }
 
   addParticipant(){
+    const pathname= window.location.pathname.split('/');
+    const path_id = pathname[2];  
+
     var data = {
         name: this.state.newPart
     }
     
     if(this.state.newPart !== ''){
-          PartDataService.addPart('1', data)
+          PartDataService.addPart(path_id, data)
       .then(response => {
           this.setState({
             submitted: true
           });
-          console.log(response.data)
           this.retrieveParticipants();
           this.newParticipant();
       })
@@ -77,7 +84,10 @@ export default class ParticipantsContainer extends Component {
   }
 
   retrieveParticipants(){
-      PartDataService.getGroup('1')
+    const pathname= window.location.pathname.split('/');
+    const path_id = pathname[2]; 
+
+      PartDataService.getGroup(path_id)
       .then(response =>{
           this.setState({
               participants: response.data
@@ -92,12 +102,12 @@ export default class ParticipantsContainer extends Component {
     const { participants } = this.state;
     
     if(!participants.length) return (
-      <div>
+      <div className='noListData'>
           <h2>No participants found</h2>
           <div className='form-group'>
-                    <input type='text' id='partInputForm' value={this.state.newPart} onChange={this.onChangeName} name='title'></input>
-                    <button id='addPartButton' onClick={this.addParticipant}>Add Participant</button> 
-                </div>
+              <input type='text' placeholder='Enter name' className='inputForm' id='partInputForm' value={this.state.newPart} onChange={this.onChangeName} name='title'></input>
+              <button className='partButtons' id='addPartButton' onClick={this.addParticipant}>Add Participant</button> 
+          </div>
 
       </div>
       
@@ -157,7 +167,7 @@ export default class ParticipantsContainer extends Component {
             </div>
 
                 <div className='form-group'>
-                    <input type='text' placeholder='Enter name' id='partInputForm' value={this.state.newPart} onChange={this.onChangeName} name='title'></input>
+                    <input type='text' placeholder='Enter name' className='inputForm' id='partInputForm' value={this.state.newPart} onChange={this.onChangeName} name='title'></input>
                     <button className='partButtons' id='addPartButton' onClick={this.addParticipant}>Add Participant</button> 
                 </div>
       </div>

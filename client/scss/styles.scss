@@ -1,5 +1,4 @@
 $light-color: rgb(217, 239, 241);
-$darker-color: powderblue;
 $lt-blue: #afdefa;
 $dk-blue: #a5c6fc;
 $text-color: darken($dk-blue, 40%);
@@ -39,6 +38,30 @@ nav{
   padding-right: 10px;
 }
 
+//general styling
+.noListData{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  font-family: 'Balsamiq Sans', cursive;
+  font-weight: bold;
+}
+
+.inputForm{
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: 'Varela Round', sans-serif;
+  margin-right: 20px;
+  background-color: $off-white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 //group page
 
 #groupsContainer{
@@ -71,6 +94,22 @@ nav{
   color: white;
 }
 
+#addGroupButton{
+  background-color: $lt-blue;
+  margin-top: 15px;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 5px;
+  font-family: 'Varela Round', sans-serif;
+  color: $extra-dk;
+}
+
+#addGroupButton:hover{
+  background-color: $extra-dk;
+  color: white;
+}
+
 //participants page
 
 #participantsContainer{
@@ -99,6 +138,7 @@ nav{
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+//style the participant cards
 .participant{
   border-radius: 10px;
   background-color: $dk-blue;
@@ -116,6 +156,7 @@ nav{
   align-self: flex-end;
   color: white;
   background-color: transparent;
+  box-shadow: none;
 }
 
 #selector{
@@ -131,12 +172,18 @@ nav{
 
 .partButtons{
   margin-top: 15px;
-  background-color: $off-white;
   border: none;
   padding: 10px 20px;
   text-align: center;
   border-radius: 5px;
   font-family: 'Varela Round', sans-serif;
+  background-color: $lt-blue;
+  color: $extra-dk;
+  font-weight: 900;
+}
+
+#randomButton{
+  background-color: $dk-blue;
 }
 
 #selectedCont{
@@ -146,14 +193,7 @@ nav{
   justify-content: center;
 }
 
-#partInputForm{
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-family: 'Varela Round', sans-serif;
-  margin-right: 20px;
-  background-color: $off-white;
-}
+
 
 .updateButton{
   border:none;

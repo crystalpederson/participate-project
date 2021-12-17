@@ -21,4 +21,30 @@ groupController.getGroups = (req, res, next) => {
     });
 };
 
+//adds a group
+groupController.addGroup = (req, res, next) => {
+  const queryID = [
+    //this is the leader_id that is passed from the URL
+    req.params.id,
+    //this is the name of the class to be added
+    req.body.name,
+  ];
+  
+  const queryText = 'INSERT INTO classes (name, leader_id) VALUES ($2, $1)'
+
+  db.query(queryText, queryID, (err, result) =>{
+    if(!result){
+      return next({
+        log: 'groupController.addGroup: ERROR: Error adding participant data to database',
+        message: {
+          err: 'Error occurred in groupController.addGroup. Check server logs for more details.',
+        },
+      });
+    }
+    res.locals.newGroup = req.body.name;
+    next();
+  });
+
+};
+
 module.exports = groupController;
