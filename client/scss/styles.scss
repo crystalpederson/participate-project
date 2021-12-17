@@ -21,6 +21,11 @@ body {
   }
 }
 
+.title{
+  text-align: center;
+}
+
+// top navigation bar
 nav{
   display: flex;
   background-color: $extra-dk;
@@ -34,8 +39,20 @@ nav{
   padding-right: 10px;
 }
 
-.title{
-  text-align: center;
+//group page
+
+#groupsContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#group-List{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .classLink{
@@ -44,7 +61,9 @@ nav{
   padding: 20px 40px;
   background-color: $off-white;
   border-radius: 10px;
-  color: $extra-dk
+  color: $extra-dk;
+  margin: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .classLink:hover{
@@ -52,12 +71,7 @@ nav{
   color: white;
 }
 
-#home{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+//participants page
 
 #participantsContainer{
   display: flex;
@@ -82,6 +96,7 @@ nav{
   margin: 10px;
   border-radius: 20px;
   background-color: $lt-blue;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .participant{
@@ -93,6 +108,7 @@ nav{
   justify-content: flex-end;
   margin: 10px;
   width: 100px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 #deleteButton{
@@ -110,6 +126,7 @@ nav{
   background-color: $lt-blue;
   border-radius: 20px;
   min-height: 200px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .partButtons{

@@ -16,6 +16,10 @@ class PartDataService {
   deletePart(id, data) {
     return http.delete(`/participants/${id}`, data);
   }
+
+  getUserClasses(id){
+    return http.get(`/class/${id}`);
+  }
 }
 
 export default new PartDataService();

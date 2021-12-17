@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 const partController = require('../controllers/partController');
+const groupController = require('../controllers/groupController');
+
+router.get('/class/:id', 
+    groupController.getGroups,
+    (req, res) => res.status(200).json(res.locals.groups)
+);
 
 //loads the participants and their data from class with given id#
 router.get('/participants/:id',
