@@ -14,13 +14,14 @@ class App extends Component{
           <a href='/' className='nav-link' id='homeLink'>
             <strong>Home</strong>
           </a>
+          <p id='mainTitle'>Participate!</p>
           <div className='navbar-nav'>
               <Link to={'/login'} className='nav-link'>
                 Login
               </Link>
-              <Link to={'/participants'} className='nav-link'>
+              {/* <Link to={'/participants'} className='nav-link'>
                 Participants
-              </Link>
+              </Link> */}
           </div>
         </nav>
 

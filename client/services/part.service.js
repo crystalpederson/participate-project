@@ -9,6 +9,14 @@ class PartDataService {
     return http.post(`/class/${id}`, data);
   }
 
+  // deleteGroup(id, data){
+  //   return http.delete(`/class/${id}`, data);
+  // }
+
+  getGroupName(id){
+    return http.get(`/groupname/${id}`)
+  }
+
   addPart(id, data) {
     return http.post(`/participants/${id}`, data);
   }

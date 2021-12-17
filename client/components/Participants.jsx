@@ -14,16 +14,19 @@ import checkmark from '../images/check.svg'
 
 const Participant =(props) => {
   const {name, status, counter} = props.info;
+
   const update = props.retrieveParticipants;
   const clear = props.clear;
+  const pathname= window.location.pathname.split('/');
+  const path_id = pathname[2];  
 
   const deletePart = (deleted) => {
-    axios.delete('/api/participants/1', { data: { name: deleted } })
+    axios.delete(`/api/participants/${path_id}`, { data: { name: deleted } })
     update();
   }
 
   const updateStatus = (partName, partStatus) => {
-    axios.put('/api/participants/1', { name: partName, status: partStatus })
+    axios.put(`/api/participants/${path_id}`, { name: partName, status: partStatus })
     clear();
     update();
   }

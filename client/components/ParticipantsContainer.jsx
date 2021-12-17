@@ -15,11 +15,13 @@ export default class ParticipantsContainer extends Component {
     this.addParticipant = this.addParticipant.bind(this);
     this.newParticipant = this.newParticipant.bind(this);
     this.selectParticipant = this.selectParticipant.bind(this);
+    this.retrieveGroupName = this.retrieveGroupName.bind(this);
 
     this.state = {
         participants: [],
         newPart: '',
         currentPart: '',
+        currentGroup: '',
         fetchedParticipants: false,
         submitted: false
     }
@@ -29,7 +31,7 @@ export default class ParticipantsContainer extends Component {
   
   componentDidMount(){
       this.retrieveParticipants();
-
+      this.retrieveGroupName();
   }
 
   onChangeName(e){
@@ -98,6 +100,21 @@ export default class ParticipantsContainer extends Component {
       })
   }
 
+  retrieveGroupName(){
+    const pathname= window.location.pathname.split('/');
+    const path_id = pathname[2]; 
+
+      PartDataService.getGroupName(path_id)
+      .then(response =>{
+          this.setState({
+              currentGroup: response.data[0].name
+          });
+      })
+      .catch(e => {
+          console.log(e);
+      })
+  }
+
   render(){
     const { participants } = this.state;
     
@@ -141,7 +158,7 @@ export default class ParticipantsContainer extends Component {
 
     return(
       <div id='participantsContainer'>
-        <h1>Period 1</h1>
+        <h1 className='title'>{this.state.currentGroup}</h1>
         <div id='selector'>
           <button className='partButtons' id='randomButton' onClick={()=>setTimeout(this.selectParticipant,300)}>Select a Random Participant!</button>
           <div id='selectorContent'>

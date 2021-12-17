@@ -16,7 +16,19 @@ router.get('/class/:id',
 router.post('/class/:id',
   groupController.addGroup,
   //when a group is added, send name of new group
-  (req, res) => res.status(200).json(res.locals.added)
+  (req, res) => res.status(200).json(res.locals.newGroup)
+);
+
+// //deletes a group from class with given name
+// router.delete('/class/:id',
+//   groupController.deleteGroup,
+//   (req, res) => res.status(200).json(res.locals.deletedGroup)
+// );
+
+//get name of current group
+router.get('/groupname/:id',
+  partController.getGroupName,
+  (req, res) => res.status(200).json(res.locals.groupName)
 );
 
 //loads the participants and their data from class with given id#

@@ -2,6 +2,24 @@ const db = require('../models/participateModels');
 
 const partController = {};
 
+partController.getGroupName = (req, res, next) => {
+  const classID = [req.params.id]
+  const queryText = 'SELECT name FROM classes WHERE id = ($1)';
+
+  db.query(queryText, classID, (err, result) =>{
+    if(!result){
+      return next({
+        log: 'partController.getGroupName: ERROR: Error getting group name',
+        message: {
+          err: 'Error occurred in partController.getGroupName. Check server logs for more details.',
+        },
+      });
+    }
+    res.locals.groupName = result.rows;
+    next();
+  });
+};
+
 partController.getParticipants = (req, res, next) => {
     const classID = [req.params.id]
     const queryText = 'SELECT name, status, counter FROM participants WHERE class_id = ($1)';
