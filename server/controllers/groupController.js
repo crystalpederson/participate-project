@@ -44,29 +44,28 @@ groupController.addGroup = (req, res, next) => {
     res.locals.newGroup = req.body.name;
     next();
   });
+}
 
-  // //delete group
-  // groupController.deleteGroup = (req, res, next) => {
-  //   const deleted = [
-  //     req.params.id,
-  //     req.body.name
-  //   ]
+groupController.deleteGroup = (req, res, next) => {
+    const deleted = [
+      req.params.id,
+      req.body.name
+    ]
+    
+    const queryText = 'DELETE FROM classes WHERE leader_id = ($1) AND name = ($2)';
   
-  //   const queryText = 'DELETE FROM classes WHERE leader_id = ($1) AND name = ($2)';
-  
-  //   db.query(queryText, deleted, (err, result) =>{
-  //     if(!result){
-  //       return next({
-  //         log: 'groupController.deleteGroup: ERROR: Error deleting participant data from database',
-  //         message: {
-  //           err: 'Error occurred in groupController.deleteGroup. Check server logs for more details.',
-  //         },
-  //       });
-  //     }
-  //     res.locals.deletedGroup = req.body.name;
-  //     next();
-  //   })
-  // };
+    db.query(queryText, deleted, (err, result) =>{
+      if(!result){
+        return next({
+          log: 'groupController.deleteGroup: ERROR: Error deleting group data from database',
+          message: {
+            err: 'Error occurred in groupController.deleteGroup. Check server logs for more details.',
+          },
+        });
+      }
+      res.locals.deletedGroup = req.body.name;
+      next();
+    })
 };
 
 module.exports = groupController;

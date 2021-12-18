@@ -4,6 +4,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Home from './Home.jsx';
 import ParticipantsContainer from './ParticipantsContainer.jsx';
 import Login from './Login.jsx';
+import SignUp from './Signup.jsx';
 
 
 class App extends Component{
@@ -19,9 +20,6 @@ class App extends Component{
               <Link to={'/login'} className='nav-link'>
                 Login
               </Link>
-              {/* <Link to={'/participants'} className='nav-link'>
-                Participants
-              </Link> */}
           </div>
         </nav>
 
@@ -30,6 +28,7 @@ class App extends Component{
             <Route path={'/home', '/'} element={<Home/>}></Route>
             <Route path='/login' element={<Login/>}></Route>
             <Route path='participants/:id' element={<ParticipantsContainer/>}></Route>
+            <Route path='/signup' element={<SignUp/>}></Route>
           </Routes>
         </div>
 

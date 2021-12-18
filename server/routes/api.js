@@ -19,11 +19,11 @@ router.post('/class/:id',
   (req, res) => res.status(200).json(res.locals.newGroup)
 );
 
-// //deletes a group from class with given name
-// router.delete('/class/:id',
-//   groupController.deleteGroup,
-//   (req, res) => res.status(200).json(res.locals.deletedGroup)
-// );
+//deletes a group for a leader with given id#
+router.delete('/class/:id',
+  groupController.deleteGroup,
+  (req, res) => res.status(200).json(res.locals.deletedGroup)
+);
 
 //get name of current group
 router.get('/groupname/:id',
@@ -55,4 +55,6 @@ router.put('/participants/:id',
   partController.updateParticipants,
   (req, res) => res.status(200).json('updated')
 );
+
+
 module.exports = router;
