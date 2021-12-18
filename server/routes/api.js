@@ -3,8 +3,24 @@ const router = express.Router();
 
 const partController = require('../controllers/partController');
 const groupController = require('../controllers/groupController');
+const userController = require('../controllers/userController')
 
+//get a list of user info
+router.get('/users',
+  userController.getAllUsers,
+  (req, res) => res.status(200).json(res.locals.users)
+)
 
+//add a new user
+router.post('/users',
+  userController.createUser,
+  (req, res) => res.status(200).json(res.locals.user)
+)
+
+router.post('/login',
+  userController.verifyUser,
+  (req, res) => res.status(200).redirect('/')
+)
 
 //loads the groups from leader with given id#
 router.get('/class/:id', 

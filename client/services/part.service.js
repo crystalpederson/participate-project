@@ -1,6 +1,11 @@
 import http from "../http-common.js";
 
 class PartDataService {
+
+  verifyUser(data) {
+    return http.post('/login', data);
+  }
+
   getGroup(id) {
     return http.get(`/participants/${id}`);
   }
